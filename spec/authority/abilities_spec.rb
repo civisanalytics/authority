@@ -71,14 +71,13 @@ describe Authority::Abilities do
 
       it "constantizes the authorizer name as the authorizer" do
         resource_class.instance_variable_set(:@authorizer, nil)
-        expect(resource_class.authorizer_name).to receive(:constantize)
+        expect(resource_class).to receive(:authorizer_name).and_call_original
         resource_class.authorizer
       end
 
       it "memoizes the authorizer to avoid reconstantizing" do
-        binding.pry
         resource_class.authorizer
-        expect(resource_class.authorizer_name).not_to receive(:constantize)
+        expect(resource_class).not_to receive(:authorizer_name)
         resource_class.authorizer
       end
 
