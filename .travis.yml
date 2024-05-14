@@ -36,6 +36,27 @@ matrix:
     - rvm: 2.5.9
       gemfile: gemfiles/3.2.gemfile
 
+    # Rails 4.0
+    - rvm: 1.9.3
+      gemfile: gemfiles/4.0.gemfile
+
+    # Rails 4.1
+    - rvm: 1.9.3
+      gemfile: gemfiles/4.1.gemfile
+
+    # Rails 4.2
+    - rvm: 1.9.3
+      gemfile: gemfiles/4.2.gemfile
+
+    # Rails 5.0
+    - rvm: 1.9.3
+      gemfile: gemfiles/5.0.gemfile
+    # - rvm: 2.0.0-p648
+    #   gemfile: gemfiles/5.0.gemfile
+    - rvm: 2.1.10
+      gemfile: gemfiles/5.0.gemfile
+
+
     # Rails 6.0
     - rvm: 1.9.3
       gemfile: gemfiles/6.0.gemfile
