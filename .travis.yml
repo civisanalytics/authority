@@ -39,8 +39,8 @@ matrix:
     # Rails 6.0
     - rvm: 1.9.3
       gemfile: gemfiles/6.0.gemfile
-    - rvm: 2.0.0-p648
-      gemfile: gemfiles/6.0.gemfile
+    # - rvm: 2.0.0-p648
+      # gemfile: gemfiles/6.0.gemfile
     - rvm: 2.1.10
       gemfile: gemfiles/6.0.gemfile
     - rvm: 2.3.7
@@ -53,8 +53,8 @@ matrix:
     # Rails 6.1
     - rvm: 1.9.3
       gemfile: gemfiles/6.1.gemfile
-    - rvm: 2.0.0-p648
-      gemfile: gemfiles/6.1.gemfile
+    # - rvm: 2.0.0-p648
+      # gemfile: gemfiles/6.1.gemfile
     - rvm: 2.1.10
       gemfile: gemfiles/6.1.gemfile
     - rvm: 2.2.6
@@ -67,8 +67,8 @@ matrix:
     # Rails 7.0
     - rvm: 1.9.3
       gemfile: gemfiles/7.0.gemfile
-    - rvm: 2.0.0-p648
-      gemfile: gemfiles/7.0.gemfile
+    # - rvm: 2.0.0-p648
+      # gemfile: gemfiles/7.0.gemfile
     - rvm: 2.1.10
       gemfile: gemfiles/7.0.gemfile
     - rvm: 2.2.6
@@ -85,8 +85,8 @@ matrix:
     # Rails 7.1
     - rvm: 1.9.3
       gemfile: gemfiles/7.1.gemfile
-    - rvm: 2.0.0-p648
-      gemfile: gemfiles/7.1.gemfile
+    # - rvm: 2.0.0-p648
+      # gemfile: gemfiles/7.1.gemfile
     - rvm: 2.1.10
       gemfile: gemfiles/7.1.gemfile
     - rvm: 2.2.6
