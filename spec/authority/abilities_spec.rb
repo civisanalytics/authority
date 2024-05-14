@@ -106,8 +106,8 @@ describe Authority::Abilities do
         context "when given an options hash" do
 
           it "delegates `#{method_name}` to its authorizer class, passing the options" do
-            expect(resource_class.authorizer).to receive(method_name).with(user, :lacking => 'nothing')
-            resource_class.send(method_name, user, :lacking => 'nothing')
+            expect(resource_class.authorizer).to receive(method_name).with(user,  {lacking: 'nothing'})
+            resource_class.send(method_name, user, {lacking: 'nothing'})
           end
 
         end
@@ -148,8 +148,8 @@ describe Authority::Abilities do
 
           it "delegates `#{method_name}` to a new authorizer instance, passing the options" do
             allow(resource_class.authorizer).to receive(:new).and_return(@authorizer)
-            expect(@authorizer).to receive(method_name).with(user, :with => 'mayo')
-            resource_instance.send(method_name, user, :with => 'mayo')
+            expect(@authorizer).to receive(method_name).with(user, {with: 'mayo'})
+            resource_instance.send(method_name, user, {with: 'mayo'})
           end
 
         end
