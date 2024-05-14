@@ -76,6 +76,7 @@ describe Authority::Abilities do
       end
 
       it "memoizes the authorizer to avoid reconstantizing" do
+        binding.pry
         resource_class.authorizer
         expect(resource_class.authorizer_name).not_to receive(:constantize)
         resource_class.authorizer

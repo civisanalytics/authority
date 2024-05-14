@@ -12,7 +12,8 @@ Gem::Specification.new do |gem|
   gem.add_dependency "activesupport", ">= 3.0.0"
 
   gem.add_development_dependency "rake",  ">= 0.8.7"
-  gem.add_development_dependency "rspec", "~> 3.13.0"
+  gem.add_development_dependency "rspec", ">= 3.13.0"
+  gem.add_dependency 'pry-byebug', '>= 3.3'
 
   gem.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
   gem.files         = `git ls-files`.split("\n")

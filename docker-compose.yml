@@ -1,13 +1,17 @@
 services:
   app:
+    env_file:
+      - .env
     build:
       context: .
       dockerfile: Dockerfile
       platforms:
         - "linux/amd64"
       args:
-        - DOCKER_RUBY_VERSION=3.1
-        - RAILS_VERSION=6.1
+        - RUBY_VERSION=${RUBY_VERSION}
+        - RAILS_VERSION=${RAILS_VERSION}
+    image:
+      ruby-${RUBY_VERSION}:rails-${RAILS_VERSION}
     platform: "linux/amd64"
     ports:
       - "3009:3000"
