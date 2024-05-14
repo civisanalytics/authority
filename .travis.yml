@@ -7,6 +7,8 @@ rvm:
   - 2.3.3
   - 2.4.0
   - 2.5.0
+  - 2.6.0
+  - 2.7.0
   - 3.0.0
   - 3.1.0
   - jruby-19mode # JRuby in 1.9 mode
@@ -23,6 +25,7 @@ gemfile:
   - gemfiles/5.0.gemfile
   - gemfiles/6.0.gemfile
   - gemfiles/6.1.gemfile
+  - gemfiles/7.0.gemfile
 
 matrix:
   exclude:
