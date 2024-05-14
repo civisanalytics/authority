@@ -32,7 +32,7 @@ gemfile:
   - gemfiles/7.0.gemfile
   - gemfiles/7.1.gemfile
 
-script: bundle exec rspec
+script: bundle exec rspec && bundle exec rubocop --force-exclusion
 
 matrix:
   exclude:
