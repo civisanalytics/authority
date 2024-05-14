@@ -15,7 +15,8 @@ describe Authority::Configuration do
 
       it "logs to standard error by default" do
         Authority.instance_variable_set :@configuration, nil
-        null = File.exists?('/dev/null') ? '/dev/null' : 'NUL:' # Allow for Windows
+        method = RUBY_VERSION < '3.2.0' ? :exists? : :exist?
+        null = File.send(method, '/dev/null') ? '/dev/null' : 'NUL:' # Allow for Windows
         logger = Logger.new(null)
         expect(Logger).to receive(:new).with(STDERR).and_return(logger)
         Authority.configure
