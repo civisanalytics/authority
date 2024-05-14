@@ -50,7 +50,7 @@ matrix:
 
     # Rails 4.0
     - rvm: jruby-19mode
-      gemfile: gemfiles/3.2.gemfile
+      gemfile: gemfiles/4.0.gemfile
     - rvm: 1.9.3
       gemfile: gemfiles/4.0.gemfile
     - rvm: 2.7.8
@@ -66,23 +66,23 @@ matrix:
 
     # Rails 4.1
     - rvm: jruby-19mode
-      gemfile: gemfiles/3.2.gemfile
+      gemfile: gemfiles/4.1.gemfile
     - rvm: 1.9.3
       gemfile: gemfiles/4.1.gemfile
     - rvm: 2.7.8
-      gemfile: gemfiles/4.0.gemfile
+      gemfile: gemfiles/4.1.gemfile
     - rvm: 3.0.7
-      gemfile: gemfiles/4.0.gemfile
+      gemfile: gemfiles/4.1.gemfile
     - rvm: 3.1.5
-      gemfile: gemfiles/4.0.gemfile
+      gemfile: gemfiles/4.1.gemfile
     - rvm: 3.2.4
-      gemfile: gemfiles/4.0.gemfile
+      gemfile: gemfiles/4.1.gemfile
     - rvm: 3.3.1
-      gemfile: gemfiles/4.0.gemfile
+      gemfile: gemfiles/4.1.gemfile
 
     # Rails 4.2
     - rvm: jruby-19mode
-      gemfile: gemfiles/3.2.gemfile
+      gemfile: gemfiles/4.2.gemfile
     - rvm: 1.9.3
       gemfile: gemfiles/4.2.gemfile
     - rvm: 2.7.8
@@ -99,22 +99,20 @@ matrix:
 
     # Rails 5.0
     - rvm: jruby-19mode
-      gemfile: gemfiles/3.2.gemfile
+      gemfile: gemfiles/5.0.gemfile
     - rvm: 1.9.3
       gemfile: gemfiles/5.0.gemfile
     - rvm: 2.1.10
       gemfile: gemfiles/5.0.gemfile
     - rvm: 3.0.7
-      gemfile: gemfiles/4.0.gemfile
+      gemfile: gemfiles/5.0.gemfile
 
 
     # Rails 6.0
     - rvm: jruby-19mode
-      gemfile: gemfiles/3.2.gemfile
+      gemfile: gemfiles/6.0.gemfile
     - rvm: 1.9.3
       gemfile: gemfiles/6.0.gemfile
-    # - rvm: 2.0.0-p648
-      # gemfile: gemfiles/6.0.gemfile
     - rvm: 2.1.10
       gemfile: gemfiles/6.0.gemfile
     - rvm: 2.3.7
@@ -124,11 +122,11 @@ matrix:
     - rvm: 2.2.6
       gemfile: gemfiles/6.0.gemfile
     - rvm: 3.0.7
-      gemfile: gemfiles/4.0.gemfile
+      gemfile: gemfiles/6.0.gemfile
 
     # Rails 6.1
     - rvm: jruby-19mode
-      gemfile: gemfiles/3.2.gemfile
+      gemfile: gemfiles/6.1.gemfile
     - rvm: 1.9.3
       gemfile: gemfiles/6.1.gemfile
     - rvm: 2.1.10
@@ -140,11 +138,11 @@ matrix:
     - rvm: 2.4.10
       gemfile: gemfiles/6.1.gemfile
     - rvm: 3.0.7
-      gemfile: gemfiles/4.0.gemfile
+      gemfile: gemfiles/6.1.gemfile
 
     # Rails 7.0
     - rvm: jruby-19mode
-      gemfile: gemfiles/3.2.gemfile
+      gemfile: gemfiles/7.0.gemfile
     - rvm: 1.9.3
       gemfile: gemfiles/7.0.gemfile
     - rvm: 2.1.10
@@ -160,11 +158,11 @@ matrix:
     - rvm: 2.6.10
       gemfile: gemfiles/7.0.gemfile
     - rvm: 3.0.7
-      gemfile: gemfiles/4.0.gemfile
+      gemfile: gemfiles/7.0.gemfile
 
     # Rails 7.1
     - rvm: jruby-19mode
-      gemfile: gemfiles/3.2.gemfile
+      gemfile: gemfiles/7.1.gemfile
     - rvm: 1.9.3
       gemfile: gemfiles/7.1.gemfile
     - rvm: 2.1.10
@@ -180,7 +178,7 @@ matrix:
     - rvm: 2.6.10
       gemfile: gemfiles/7.1.gemfile
     - rvm: 3.0.7
-      gemfile: gemfiles/4.0.gemfile
+      gemfile: gemfiles/7.1.gemfile
 
 
 
