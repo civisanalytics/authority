@@ -1,6 +1,6 @@
 class ApplicationAuthorizer < Authority::Authorizer
-  def self.readable_by?(user)
-    true
+  def self.readable_by?(user, options = {})
+    default(:readable, user, options)
   end
 end
 

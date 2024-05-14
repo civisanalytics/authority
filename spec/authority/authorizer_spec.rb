@@ -39,7 +39,7 @@ describe Authority::Authorizer do
         context "when given an options hash" do
 
           it "delegates `#{method_name}` to the corresponding class method, passing the options" do
-            expect(authorizer.class).to receive(method_name).with(user, :under => 'God')
+            expect(authorizer.class).to receive(method_name).with(user, {:under => 'God'})
             authorizer.send(method_name, user, :under => 'God')
           end
 
@@ -75,8 +75,8 @@ describe Authority::Authorizer do
 
           it "delegates `#{method_name}` to the authorizer's `default` method, passing the options" do
             able = method_name.sub('_by?', '').to_sym
-            expect(Authority::Authorizer).to receive(:default).with(able, user, :with => 'gusto')
-            Authority::Authorizer.send(method_name, user, :with => 'gusto')
+            expect(authorizer.class).to receive(:default).with(able, user, {:with => 'gusto'})
+            authorizer.send(method_name, user, :with => 'gusto')
           end
 
         end

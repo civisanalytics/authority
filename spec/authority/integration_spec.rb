@@ -19,7 +19,7 @@ describe "integration from user through model to authorizer" do
         describe "if given an options hash" do
 
           it "delegates `#{adjective_method}` to its authorizer class, passing the options" do
-            expect(resource_class.authorizer).to receive(adjective_method).with(user, :lacking => 'nothing')
+            expect(resource_class.authorizer).to receive(adjective_method).with(user, {:lacking => 'nothing'})
             user.send(verb_method, resource_class, :lacking => 'nothing')
           end
 
@@ -58,8 +58,8 @@ describe "integration from user through model to authorizer" do
         describe "if given an options hash" do
 
           it "delegates `#{adjective_method}` to a new authorizer instance, passing the options" do
-            expect(authorizer_instance).to receive(adjective_method).with(user, :consistency => 'mushy')
-            user.send(verb_method, resource_instance, :consistency => 'mushy')
+            expect(resource_class.authorizer).to receive(adjective_method).with(user, {consistency: 'mushy'})
+            user.send(verb_method, resource_class, {consistency: 'mushy'})
           end
 
         end
