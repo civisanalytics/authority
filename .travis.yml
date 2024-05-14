@@ -1,7 +1,7 @@
 language: ruby
 rvm:
   - 1.9.3
-  - 2.0.0
+  - 2.0.0-p648
   - 2.1.10
   - 2.2.6
   - 2.3.7
@@ -42,14 +42,14 @@ matrix:
     # rails 5.0 requires ruby >= 2.2.2
     - rvm: 1.9.3
       gemfile: gemfiles/5.0.gemfile
-    - rvm: 2.0.0
+    - rvm: 2.0.0-p648
       gemfile: gemfiles/5.0.gemfile
     - rvm: 2.1.10
       gemfile: gemfiles/5.0.gemfile
     # rails 6.0 requires ruby >= 2.5.0
     - rvm: 1.9.3
       gemfile: gemfiles/6.0.gemfile
-    - rvm: 2.0.0
+    - rvm: 2.0.0-p648
       gemfile: gemfiles/6.0.gemfile
     - rvm: 2.1.10
       gemfile: gemfiles/6.0.gemfile
@@ -62,7 +62,7 @@ matrix:
     # rails 6.1 requires ruby >= 2.5.0
     - rvm: 1.9.3
       gemfile: gemfiles/6.1.gemfile
-    - rvm: 2.0.0
+    - rvm: 2.0.0-p648
       gemfile: gemfiles/6.1.gemfile
     - rvm: 2.1.10
       gemfile: gemfiles/6.1.gemfile
@@ -75,7 +75,7 @@ matrix:
     # rails 7.0 requires ruby >= 2.7.0
     - rvm: 1.9.3
       gemfile: gemfiles/7.0.gemfile
-    - rvm: 2.0.0
+    - rvm: 2.0.0-p648
       gemfile: gemfiles/7.0.gemfile
     - rvm: 2.1.10
       gemfile: gemfiles/7.0.gemfile
