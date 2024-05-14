@@ -20,5 +20,3 @@ tmp
 .ruby-version
 .ruby-gemset
 .env
-**Gemfile
-**Gemfile.lock
