@@ -3,7 +3,7 @@ FROM --platform=linux/amd64 ruby:${RUBY_VERSION}
 ARG RAILS_VERSION
 
 # Set the working directory in the container to /app
-WORKDIR /src
+WORKDIR /workspaces/authority
 
 # Add metadata to the image to describe which port the container is listening on at runtime
 EXPOSE 3000

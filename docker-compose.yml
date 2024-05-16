@@ -17,6 +17,6 @@ services:
     ports:
       - "3009:3000"
     volumes:
-      - .:/src
+      - .:/workspaces/authority
 
     command: tail -f /dev/null
