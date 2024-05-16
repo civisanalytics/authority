@@ -1,7 +1,7 @@
 services:
   app:
     env_file:
-      - path: .env
+      - path: './.env'
         required: false
     build:
       context: .
