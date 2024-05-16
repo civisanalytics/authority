@@ -1,5 +1,5 @@
 ARG RUBY_VERSION
-FROM --platform=linux/amd64 ruby:${RUBY_VERSION}
+FROM --platform=linux/amd64 mcr.microsoft.com/vscode/devcontainers/ruby:${RUBY_VERSION}
 ARG RAILS_VERSION
 
 # Set the working directory in the container to /app
