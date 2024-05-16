@@ -1,13 +1,5 @@
 # Authority
 
-Authority is now unmaintained.
-Users who have installed it decided to trust me, and I'm not comfortable transferring that trust to someone else on their behalf.
-However, if you'd like to fork it, feel free.
-
-Gary Foster has provided a [script to migrate to Pundit](https://gist.github.com/garyfoster/5f1aba65b20ac7464e7e9642ea966c3f).
-
-## Overview
-
 Authority helps you authorize actions in your Ruby app. It's **ORM-neutral** and has very little fancy syntax; just group your models under one or more Authorizer classes and write plain Ruby methods on them.
 
 Authority will work fine with a standalone app or a single sign-on system. You can check roles in a database or permissions in a YAML file. It doesn't care! What it **does** do is give you an easy way to organize your logic and handle unauthorized actions.
@@ -15,39 +7,38 @@ Authority will work fine with a standalone app or a single sign-on system. You c
 If you're using it with Rails controllers, it requires that you already have some kind of user object in your application, accessible via a method like `current_user` (configurable).
 
 [![Gem Version](https://badge.fury.io/rb/authority.png)](https://rubygems.org/gems/authority)
-[![Build Status](https://secure.travis-ci.org/nathanl/authority.png?branch=master)](http://travis-ci.org/nathanl/authority)
-[![Code Climate](https://codeclimate.com/github/nathanl/authority.png)](https://codeclimate.com/github/nathanl/authority)
-[![Dependency Status](https://gemnasium.com/nathanl/authority.png)](https://gemnasium.com/nathanl/authority)
-[![Join the chat at https://gitter.im/nathanl/authority](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/nathanl/authority?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
-## Contents
+## Table of contents
+* [Overview](#overview)
+* [The Flow of Authority](#the_flow_of_authority)
+* [Installation](#installation)
+* [Defining Your Abilities](#defining_your_abilities)
+* [Wiring It Together](#wiring_it_together)
+  - [Users](#users)
+  - [Models](#models)
+  - [Authorizers](#authorizers)
+    * [Passing Options](#passing_options)
+    * [Default methods](#default_methods)
+    * [Testing Authorizers](#testing_authorizers)
+  - [Controllers](#controllers)
+  - [Views](#views)
+* [The Generic `can?`](#the_generic_can)
+* [Security Violations &amp; Logging](##security_violations_and_logging)
+* [Credits](#credits)
+* [Contributing](#contributing)
+* [Docker](#docker)
+  - [Build Image and Run Container](#build_image_and_run_container)
+  - [Using ./start_container.sh with .env File](#start_container_script_with_env_file)
+  - [Using ./start_container.sh with command line arguments](#start_container_with_command_line_arguments)
+  - [Need to rebuild the docker image?](#rebuild_docker_image)
+  - [Want to start the container and immediately run a command?](#start_container_immediately_run_command)
+  - [If we ever need to migrate to Pundit](#migrate_to_pundit)
 
-<ul>
-  <li><a href="#overview">Overview</a></li>
-  <li><a href="#flow_of_authority">The flow of Authority</a></li>
-  <li><a href="#installation">Installation</a></li>
-  <li><a href="#defining_your_abilities">Defining Your Abilities</a></li>
-  <li><a href="#wiring_it_together">Wiring It Together</a>
-  <ul>
-    <li><a href="#users">Users</a></li>
-    <li><a href="#models">Models</a></li>
-    <li><a href="#authorizers">Authorizers</a>
-    <ul>
-      <li><a href="#passing_options">Passing Options</a></li>
-      <li><a href="#default_methods">Default methods</a></li>
-      <li><a href="#testing_authorizers">Testing Authorizers</a></li>
-    </ul></li>
-    <li><a href="#controllers">Controllers</a></li>
-    <li><a href="#views">Views</a></li>
-  </ul></li>
-  <li><a href="#the_generic_can">The Generic `can?`</a>
-  <li><a href="#security_violations_and_logging">Security Violations &amp; Logging</a></li>
-  <li><a href="#credits">Credits</a></li>
-  <li><a href="#contributing">Contributing</a></li>
-  <li><a href="#docker">Local Development with Docker</a></li>
-</ul>
+<a name="intro"></a>
 
-<a name="overview">
+
+<a name="overview"></a>
+
 ## Overview
 
 Using Authority, you have:
@@ -78,8 +69,9 @@ All you have to do is define the methods you need on your authorizers. You have 
 
 **You** make the rules; Authority enforces them.
 
-<a name="flow_of_authority">
-## The flow of Authority
+<a name="the_flow_of_authority"></a>
+
+## The Flow of Authority
 
 Authority encapsulates all authorization logic in `Authorizer` classes. Want to do something with a model? **Ask its authorizer**.
 
@@ -135,14 +127,16 @@ The authorization process for instances is different in that it calls the instan
 
 (Diagrams made with [AsciiFlow](http://asciiflow.com))
 
-<a name="installation">
+<a name="installation"></a>
+
 ## Installation
 
 Starting from a clean commit status, add `authority` to your Gemfile, then `bundle`.
 
 If you're using Rails, run `rails g authority:install`. Otherwise, pass a block to `Authority.configure` with [configuration options](https://github.com/nathanl/authority/blob/master/lib/generators/templates/authority_initializer.rb) somewhere when your application boots up.
 
-<a name="defining_your_abilities">
+<a name="defining_your_abilities"></a>
+
 ## Defining Your Abilities
 
 Edit `config/initializers/authority.rb`. That file documents all your options, but one of particular interest is `config.abilities`, which defines the verbs and corresponding adjectives in your app. The defaults are:
@@ -158,10 +152,12 @@ config.abilities =  {
 
 This option determines what methods are added to your users, models and authorizers. If you need to ask `user.can_deactivate?(Satellite)` and `@satellite.deactivatable_by?(user)`, add `:deactivate => 'deactivatable'` to the hash.
 
-<a name="wiring_it_together">
+<a name="wiring_it_together"></a>
+
 ## Wiring It Together
 
-<a name="users">
+<a name="users"></a>
+
 ### Users
 
 ```ruby
@@ -173,7 +169,8 @@ class User
 end
 ```
 
-<a name="models">
+<a name="models"></a>
+
 ### Models
 
 ```ruby
@@ -188,7 +185,8 @@ class Article
 end
 ```
 
-<a name="authorizers">
+<a name="authorizers"></a>
+
 ### Authorizers
 
 Add your authorizers under `app/authorizers`, subclassing the generated `ApplicationAuthorizer`.
@@ -222,7 +220,8 @@ ScheduleAuthorizer.updatable_by?(user)
 
 As you can see, you can specify different logic for every method on every model, if necessary. On the other extreme, you could simply supply a [default method](#default_methods) that covers all your use cases.
 
-<a name="passing_options">
+<a name="passing_options"></a>
+
 #### Passing Options
 
 Any options you pass when checking permissions will be passed right up the chain. One use case for this would be if you needed an associated instance in order to do a class-level check. For example:
@@ -245,7 +244,8 @@ And you could always handle the case above without options if you don't mind cre
 user.can_create?(Comment.new(:post => @post))
 ```
 
-<a name="default_methods">
+<a name="default_methods"></a>
+
 #### Default Methods
 
 Any class method you don't define on an authorizer will call the `default` method on that authorizer. This method is defined on `Authority::Authorizer` to simply return false. This is a 'whitelisting' approach; any permission you haven't specified (which falls back to the default method) is considered forbidden.
@@ -277,7 +277,8 @@ end
 
 If your system is uniform enough, **this method alone might handle all the logic you need**.
 
-<a name="testing_authorizers">
+<a name="#testing_authorizers"></a>
+
 #### Testing Authorizers
 
 One nice thing about putting your authorization logic in authorizers is the ease of testing. Here's a brief example.
@@ -321,7 +322,8 @@ describe AdminAuthorizer do
 end
 ```
 
-<a name="controllers">
+<a name="controllers"></a>
+
 ### Controllers
 
 If you're using Rails, ActionController support will be loaded in through a Railtie. Otherwise, you'll want to integrate it into your framework yourself. [Authority's controller](https://github.com/nathanl/authority/blob/master/lib/authority/controller.rb) is an excellent starting point.
@@ -447,7 +449,8 @@ end
 
 If you want a skippable filter, you can roll your own using the instance method, also called `ensure_authorization_performed`.
 
-<a name="views">
+<a name="views"></a>
+
 ### Views
 
 Assuming your user object is available in your views, you can do all kinds of conditional rendering. For example:
@@ -458,7 +461,8 @@ link_to 'Edit Widget', edit_widget_path(@widget) if current_user.can_update?(@wi
 
 If the user isn't allowed to edit widgets, they won't see the link. If they're nosy and try to hit the URL directly, they'll get a [Security Violation](#security_violations_and_logging) from the controller.
 
-<a name="the_generic_can">
+<a name="the_generic_can"></a>
+
 ## The Generic `can?`
 
 Authority is organized around protecting resources. But **occasionally** you **may** need to authorize something that has no particular resource. For that, it provides the generic `can?` method. It works like this:
@@ -478,7 +482,8 @@ end
 
 Use this very sparingly, and consider it a [code smell](http://en.wikipedia.org/wiki/Code_smell). Overuse will turn your `ApplicationAuthorizer` into a junk drawer of methods. Ask yourself, "am I sure I don't have a resource for this? Should I have one?"
 
-<a name="security_violations_and_logging">
+<a name="security_violations_and_logging"></a>
+
 ## Security Violations & Logging
 
 If you're using Authority's `ActiveController` integration or have used it as a template for your own, your application will handle unauthorized requests with `403 Forbidden` automatically.
@@ -512,7 +517,8 @@ def authority_success(user, action, resource)
 end
 ```
 
-<a name="credits">
+<a name="credits"></a>
+
 ## Credits, AKA 'Shout-Outs'
 
 - [adamhunter](https://github.com/adamhunter) for pairing with me on this gem. The only thing faster than his typing is his brain.
@@ -521,7 +527,7 @@ end
 - [jnunemaker](https://github.com/jnunemaker) for later creating [Canable](http://github.com/jnunemaker/canable), another inspiration for Authority.
 - [TMA](http://www.tma1.com) for sponsoring the initial releases of Authority.
 
-<a name="contributing">
+<a name="contributing"></a>
 
 ## Responses, AKA 'Hollaback'
 
@@ -556,14 +562,20 @@ Tell me your problems and/or ideas.
 9. Push to the branch (`git push origin my-new-feature`)
 10. Create a new Pull Request
 
-<a name="docker">
-## Local Development with Docker
+<a name="docker"></a>
+
+## Docker
 
 This repo is set up with a unique local Docker setup with Docker Compose. With it, you can quickly build a Docker image with your preferred version of Ruby and your preferred version of Rails.
 
 For example, to spin up a container with Ruby 3.3 and Rails 7.1, you have the following options...
 
+<a name="build_image_and_run_container"></a>
+
 ### Build Image and Run Container
+
+
+<a name="start_container_script_with_env_file"></a>
 
 ### Using ./start_container.sh with .env File
 1. Create a copy of `example.env` named `.env` and place it in the root of the repo.
@@ -574,11 +586,15 @@ For example, to spin up a container with Ruby 3.3 and Rails 7.1, you have the fo
 ./start_container.sh
 ```
 
+<a name="start_container_with_command_line_arguments"></a>
+
 ### Using ./start_container.sh with command line arguments
 1. Run the start_container.sh script with the appropriate arguments
 ```bash
 ./start_container.sh --ruby 3.3 --rails 7.1
 ```
+
+<a name="rebuild_docker_image"></a>
 
 ### Need to rebuild the docker image?
 
@@ -586,6 +602,8 @@ For example, to spin up a container with Ruby 3.3 and Rails 7.1, you have the fo
 ./start_container.sh --build
 ./start_container.sh --rails 6.1 --ruby 3.1 --build
 ```
+
+<a name="start_container_immediately_run_command"></a>
 
 ### Want to start the container and immediately run a command?
 
@@ -596,3 +614,9 @@ For example, to spin up a container with Ruby 3.3 and Rails 7.1, you have the fo
   ./srart_container.sh --rails 6.1 --ruby 3.2 --command "echo 'hello world'"
   ./srart_container.sh --rails 6.1 --ruby 3.2 --command "echo rspec
 ```
+
+<a name="migrate_to_pundit"></a>
+
+## If we ever need to migrate to Pundit
+
+Gary Foster has provided a [script to migrate to Pundit](https://gist.github.com/garyfoster/5f1aba65b20ac7464e7e9642ea966c3f).
