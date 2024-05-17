@@ -18,6 +18,7 @@ Gem::Specification.new do |spec|
 
   spec.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
   spec.files         = `git ls-files`.split("\n")
+  spec.files         -= spec.files.select { |f| f.match(%r{^(bin|spec|features|gemfiles)/}) }
   spec.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
   spec.name          = "civis-authority"
   spec.require_paths = ["lib"]
