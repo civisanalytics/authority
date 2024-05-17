@@ -36,7 +36,7 @@ gemfile:
   - gemfiles/7.0.gemfile
   - gemfiles/7.1.gemfile
 
-script: bundle exec rspec
+script: bundle exec rspec && gem build authority.gemspec
 
 matrix:
   exclude:
@@ -117,7 +117,6 @@ matrix:
       gemfile: gemfiles/6.0.gemfile
     - rvm: 2.2
       gemfile: gemfiles/6.0.gemfile
-
 
     # Rails 6.1
     - rvm: 2.1
