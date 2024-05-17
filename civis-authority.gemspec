@@ -20,6 +20,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'pry-byebug', '~> 3.3', '< 4.0'
   spec.add_development_dependency 'rspec', '>= 3.4.0', '< 4.0'
   spec.add_development_dependency 'rubocop', '>= 0.42.0', '< 2.0.0'
+  spec.add_development_dependency 'rubocop-rspec', '>= 1.0.0', '< 3.0.0'
 
   spec.executables   = `git ls-files -- bin/*`.split("\n").map { |f| File.basename(f) }
   spec.files         = `git ls-files`.split("\n")
