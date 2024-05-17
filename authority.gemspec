@@ -20,7 +20,7 @@ Gem::Specification.new do |spec|
   spec.files         = `git ls-files`.split("\n")
   spec.files         -= spec.files.select { |f| f.match(%r{^(bin|spec|features|gemfiles)/}) }
   spec.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
-  spec.name          = "civis-authority"
+  spec.name          = "authority"
   spec.require_paths = ["lib"]
   spec.version       = Authority::VERSION
 end
