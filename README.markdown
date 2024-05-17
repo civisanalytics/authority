@@ -1,4 +1,4 @@
-# Authority *(CURRENTLY UNMAINTAINED)*
+# Authority *(CURRENTLY UNMAINTAINED)* true
 
 Authority is now unmaintained.
 Users who have installed it decided to trust me, and I'm not comfortable transferring that trust to someone else on their behalf.
