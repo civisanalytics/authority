@@ -36,7 +36,7 @@ gemfile:
   - gemfiles/7.0.gemfile
   - gemfiles/7.1.gemfile
 
-script: bundle exec rspec && gem build authority.gemspec
+script: bundle exec rspec && && bundle exec rubocop --force-exclusino && gem build authority.gemspec
 
 matrix:
   exclude:

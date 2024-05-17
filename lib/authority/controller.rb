@@ -111,7 +111,7 @@ module Authority
       # for all Rails actions in the action map
       def force_action(forced_action)
         add_actions(
-          Hash[authority_action_map.map {|key, _| [key, forced_action] }]
+          authority_action_map.transform_values {|_| forced_action }
         )
       end
     end
@@ -190,7 +190,9 @@ module Authority
     end
 
     class MissingAction             < StandardError ; end
+
     class MissingResource           < StandardError ; end
+
     class AuthorizationNotPerformed < StandardError ; end
   end
 end
