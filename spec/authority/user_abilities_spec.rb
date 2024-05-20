@@ -18,7 +18,7 @@ describe Authority::UserAbilities do
       describe "if given options" do
 
         it "delegates the authorization check to the resource, passing the options" do
-          expect(resource_instance).to receive("#{Authority.abilities[verb]}_by?").with(user, :size => 'wee')
+          expect(resource_instance).to receive("#{Authority.abilities[verb]}_by?").with(user, {:size => 'wee'})
           user.send(method_name, resource_instance, :size => 'wee')
         end
 
@@ -50,7 +50,7 @@ describe Authority::UserAbilities do
       end
 
       it "passes along options if any were given" do
-        expect(ApplicationAuthorizer).to receive(:authorizes_to_mimic_lemurs?).with(user, :for => :academic_credit)
+        expect(ApplicationAuthorizer).to receive(:authorizes_to_mimic_lemurs?).with(user, {:for => :academic_credit})
         user.can?(:mimic_lemurs, :for => :academic_credit)
       end
 

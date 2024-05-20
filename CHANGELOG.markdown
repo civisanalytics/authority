@@ -2,9 +2,12 @@
 
 Authority does its best to use [semantic versioning](http://semver.org).
 
-## Unreleased
+## 4.0.0
 
-(nothing)
+- Drops support for Ruby 1.X
+- Drops support for Ruby 2.0
+- Adds support for Ruby 3.0, 3.1, 3.2, and 3.3
+- Adds support for Rails 5.1, 5.2, 6.0, 6.1, 7.0, and 7.1
 
 ## 3.3.0
 
@@ -41,7 +44,7 @@ Officially drop support for Ruby < 1.9.3 and Rails < 3.2.
 
 ## v2.9.0
 
-Add `all_actions` option for `authorize_actions_for`, thanks to [Igor Davydov](https://github.com/div). 
+Add `all_actions` option for `authorize_actions_for`, thanks to [Igor Davydov](https://github.com/div).
 
 ## v2.8.1
 

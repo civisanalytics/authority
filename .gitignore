@@ -19,3 +19,4 @@ tmp
 *.swo
 .ruby-version
 .ruby-gemset
+.env

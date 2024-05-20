@@ -71,14 +71,16 @@ describe Authority::Abilities do
 
       it "constantizes the authorizer name as the authorizer" do
         resource_class.instance_variable_set(:@authorizer, nil)
-        expect(resource_class.authorizer_name).to receive(:constantize)
-        resource_class.authorizer
+        expect(resource_class).to receive(:authorizer_name).and_call_original
+        expect(resource_class.authorizer).to eq(ExampleResourceAuthorizer)
       end
 
       it "memoizes the authorizer to avoid reconstantizing" do
-        resource_class.authorizer
-        expect(resource_class.authorizer_name).not_to receive(:constantize)
-        resource_class.authorizer
+        authorizer_name = resource_class.authorizer
+        expect(authorizer_name).to eq(ExampleResourceAuthorizer)
+        expect(resource_class).not_to receive(:authorizer_name)
+        authorizer_name = resource_class.authorizer
+        expect(authorizer_name).to eq(ExampleResourceAuthorizer)
       end
 
       it "raises a friendly error if the authorizer doesn't exist" do
@@ -106,8 +108,8 @@ describe Authority::Abilities do
         context "when given an options hash" do
 
           it "delegates `#{method_name}` to its authorizer class, passing the options" do
-            expect(resource_class.authorizer).to receive(method_name).with(user, :lacking => 'nothing')
-            resource_class.send(method_name, user, :lacking => 'nothing')
+            expect(resource_class.authorizer).to receive(method_name).with(user,  {lacking: 'nothing'})
+            resource_class.send(method_name, user, {lacking: 'nothing'})
           end
 
         end
@@ -148,8 +150,8 @@ describe Authority::Abilities do
 
           it "delegates `#{method_name}` to a new authorizer instance, passing the options" do
             allow(resource_class.authorizer).to receive(:new).and_return(@authorizer)
-            expect(@authorizer).to receive(method_name).with(user, :with => 'mayo')
-            resource_instance.send(method_name, user, :with => 'mayo')
+            expect(@authorizer).to receive(method_name).with(user, {with: 'mayo'})
+            resource_instance.send(method_name, user, {with: 'mayo'})
           end
 
         end
