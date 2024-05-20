@@ -47,10 +47,8 @@ module Authority
         self.authority_resource = resource_or_finder
         add_actions(options.fetch(:actions, {}))
         force_action(options[:all_actions]) if options[:all_actions]
-        
         # Capture custom authorization options
         self.authority_arguments = options.delete(:args)
-        
         if respond_to? :before_action
           before_action :run_authorization_check, options
         else
@@ -85,7 +83,7 @@ module Authority
           after_filter(options.slice(:only, :except)) do |controller_instance|
              controller_instance.ensure_authorization_performed(options)
           end
-        end        
+        end
       end
 
       # The controller action to authority action map used for determining
@@ -111,7 +109,7 @@ module Authority
       # for all Rails actions in the action map
       def force_action(forced_action)
         add_actions(
-          authority_action_map.transform_values {|_| forced_action }
+          Hash[authority_action_map.map {|key, _| [key, forced_action] }]
         )
       end
     end
@@ -136,7 +134,7 @@ module Authority
 
       # This method is always invoked, but will only log if it's overriden
       authority_success(authority_user, authority_action, authority_resource)
-      
+
       self.authorization_performed = true
     end
 
