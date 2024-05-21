@@ -2,6 +2,10 @@
 
 Authority does its best to use [semantic versioning](http://semver.org).
 
+## 4.0.1
+
+- change references to civis-authority back to authority
+
 ## 4.0.0
 
 - Drops support for Ruby 1.X
