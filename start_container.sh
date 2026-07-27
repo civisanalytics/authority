@@ -83,9 +83,15 @@ echo "Using Rails version: $RAILS_VERSION"
 # Run the Docker Compose command
 docker-compose up -d $BUILD
 
+# The container bind-mounts the repo over /src, which hides the Rails-version-pinned
+# Gemfile the Dockerfile generated at build time. Pin BUNDLE_GEMFILE explicitly so the
+# running container actually tests against gemfiles/$RAILS_VERSION.gemfile instead of
+# silently falling back to the unversioned root Gemfile.
+BUNDLE_GEMFILE="/src/gemfiles/${RAILS_VERSION}.gemfile"
+
 # Check if COMMAND is set
 if [ -n "$COMMAND" ]; then
-    docker-compose exec app bash -c "$COMMAND"
+    docker-compose exec -e BUNDLE_GEMFILE="$BUNDLE_GEMFILE" app bash -c "$COMMAND"
 else
-    docker-compose exec app bash
+    docker-compose exec -e BUNDLE_GEMFILE="$BUNDLE_GEMFILE" app bash
 fi
