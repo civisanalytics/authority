@@ -11,11 +11,11 @@ Gem::Specification.new do |spec|
 
   spec.homepage      = 'https://github.com/civisanalytics/authority'
 
-  spec.required_ruby_version = '>= 2.1.0', '< 3.4'
+  spec.required_ruby_version = '>= 3.2.0'
 
-  spec.add_runtime_dependency 'activesupport', '>= 3.0.0', '< 8.0'
+  spec.add_runtime_dependency 'activesupport', '>= 6.1', '< 9'
 
-  spec.add_development_dependency 'pry-byebug', '~> 3.3', '< 4.0'
+  spec.add_development_dependency 'pry-byebug', '~> 3.3'
   spec.add_development_dependency 'rspec', '>= 3.4.0', '< 4.0'
 
   spec.executables   = `git ls-files -- bin/*`.split("\n").map { |f| File.basename(f) }
