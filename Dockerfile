@@ -9,7 +9,7 @@ WORKDIR /src
 EXPOSE 3000
 
 COPY ./gemfiles ./gemfiles
-COPY civis-authority.gemspec .
+COPY authority.gemspec .
 COPY ./lib/authority/version.rb ./lib/authority/version.rb
 
 

@@ -7,7 +7,7 @@ Authority will work fine with a standalone app or a single sign-on system. You c
 If you're using it with Rails controllers, it requires that you already have some kind of user object in your application, accessible via a method like `current_user` (configurable).
 
 [![Gem Version](https://badge.fury.io/rb/authority.png)](https://rubygems.org/gems/authority)
-[![Build Status](https://app.travis-ci.com/civisanalytics/authority.svg?token=fs2y9wy4QA66tsgzxhsi&branch=main)](https://app.travis-ci.com/github/civisanalytics/authority/)
+[![CI](https://github.com/civisanalytics/authority/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/civisanalytics/authority/actions/workflows/ci.yml)
 
 ## Table of contents
 * [Overview](#overview)
@@ -569,7 +569,7 @@ Tell me your problems and/or ideas.
 
 This repo is set up with a unique local Docker setup with Docker Compose. With it, you can quickly build a Docker image with your preferred version of Ruby and your preferred version of Rails.
 
-For example, to spin up a container with Ruby 3.3 and Rails 7.1, you have the following options...
+For example, to spin up a container with Ruby 3.4 and Rails 8.0, you have the following options...
 
 <a name="build_image_and_run_container"></a>
 
@@ -580,8 +580,8 @@ For example, to spin up a container with Ruby 3.3 and Rails 7.1, you have the fo
 
 ### Using ./start_container.sh with .env File
 1. Create a copy of `example.env` named `.env` and place it in the root of the repo.
-2. Set the version of Ruby to whatever you desire. `RUBY_VERSION=3.3`
-3. Set the version of RAILS to whatever you desire. `RAILS_VERSION=7.1`
+2. Set the version of Ruby to whatever you desire. `RUBY_VERSION=3.4`
+3. Set the version of RAILS to whatever you desire. `RAILS_VERSION=8.0`
 4. Run the following command
 ```bash
 ./start_container.sh
@@ -592,7 +592,7 @@ For example, to spin up a container with Ruby 3.3 and Rails 7.1, you have the fo
 ### Using ./start_container.sh with command line arguments
 1. Run the start_container.sh script with the appropriate arguments
 ```bash
-./start_container.sh --ruby 3.3 --rails 7.1
+./start_container.sh --ruby 3.4 --rails 8.0
 ```
 
 <a name="rebuild_docker_image"></a>
@@ -601,7 +601,7 @@ For example, to spin up a container with Ruby 3.3 and Rails 7.1, you have the fo
 
 ```bash
 ./start_container.sh --build
-./start_container.sh --rails 6.1 --ruby 3.1 --build
+./start_container.sh --rails 6.1 --ruby 3.2 --build
 ```
 
 <a name="start_container_immediately_run_command"></a>

@@ -2,6 +2,16 @@
 
 Authority does its best to use [semantic versioning](http://semver.org).
 
+## 5.0.0
+
+- Drops support for Ruby 2.1-3.1 (all EOL upstream)
+- Adds support for Ruby 3.4 and 3.5
+- Drops support for Rails 3.2, 4.0, 4.1, 4.2, 5.0, 5.1, 5.2, and 6.0 (all EOL upstream)
+- Adds support for Rails 7.2 and 8.0
+- Raises the `activesupport` dependency floor to `>= 6.1` and cap to `< 9`
+- Migrates CI from Travis CI to GitHub Actions
+- Fixes stale `civis-authority.gemspec` references in the Dockerfile and CI config (should be `authority.gemspec`)
+
 ## 4.0.1
 
 - change references to civis-authority back to authority
