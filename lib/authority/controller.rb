@@ -34,14 +34,14 @@ module Authority
 
     module ClassMethods
 
-      # Sets up before_filter to ensure user is allowed to perform a given controller action
+      # Sets up before_action to ensure user is allowed to perform a given controller action
       #
       # @param [Class OR Symbol] resource_or_finder - class whose authorizer
       # should be consulted, or instance method on the controller which will
       # determine that class when the request is made
       # @param [Hash] options - can contain :actions to
       # be merged with existing
-      # ones and any other options applicable to a before_filter,
+      # ones and any other options applicable to a before_action,
       # and can contain an array of :opts to pass to the authorizer
       def authorize_actions_for(resource_or_finder, options = {})
         self.authority_resource = resource_or_finder
@@ -49,11 +49,7 @@ module Authority
         force_action(options[:all_actions]) if options[:all_actions]
         # Capture custom authorization options
         self.authority_arguments = options.delete(:args)
-        if respond_to? :before_action
-          before_action :run_authorization_check, options
-        else
-          before_filter :run_authorization_check, options
-        end
+        before_action :run_authorization_check, options
       end
 
       # Allows defining and overriding a controller's map of its actions to the model's authorizer methods
@@ -75,14 +71,8 @@ module Authority
 
       # Convenience wrapper for instance method
       def ensure_authorization_performed(options = {})
-        if respond_to? :after_action
-          after_action(options.slice(:only, :except)) do |controller_instance|
-             controller_instance.ensure_authorization_performed(options)
-          end
-        else
-          after_filter(options.slice(:only, :except)) do |controller_instance|
-             controller_instance.ensure_authorization_performed(options)
-          end
+        after_action(options.slice(:only, :except)) do |controller_instance|
+           controller_instance.ensure_authorization_performed(options)
         end
       end
 
@@ -116,7 +106,7 @@ module Authority
 
     protected
 
-    # To be run in a `before_filter`; ensure this controller action is allowed for the user
+    # To be run in a `before_action`; ensure this controller action is allowed for the user
     # Can be used directly within a controller action as well, given an instance or class with or
     # without options to delegate to the authorizer.
     #
@@ -153,7 +143,7 @@ module Authority
 
     private
 
-    # The `before_filter` that will be setup to run when the class method
+    # The `before_action` that will be setup to run when the class method
     # `authorize_actions_for` is called
     def run_authorization_check
       if instance_authority_resource.is_a?(Array)

@@ -331,7 +331,7 @@ If you're using Rails, ActionController support will be loaded in through a Rail
 
 You can check authorization in your controllers in one of two ways:
 
-- `authorize_actions_for Llama` protects multiple controller actions with a `before_filter`, which performs a **class-level** check. If the current user is never allowed to delete a `Llama`, they'll never even get to the controller's `destroy` method.
+- `authorize_actions_for Llama` protects multiple controller actions with a `before_action`, which performs a **class-level** check. If the current user is never allowed to delete a `Llama`, they'll never even get to the controller's `destroy` method.
 - `authorize_action_for @llama` can be called inside a single controller action, and performs an **instance-level** check. If called inside `update`, it will check whether the current user is allowed to update this particular `@llama` instance.
 
 If either method finds a user attempting something they're not authorized to do, a [Security Violation](#security_violations_and_logging) will result.
@@ -434,9 +434,9 @@ class EmployeesController < ApplicationController
 end
 ```
 
-Finally, you can enforce that every controller action runs an authorization check using the class method `ensure_authorization_performed`, which sets up an `after_filter` to raise an exception if it wasn't. Any `only` or `except` arguments will be passed to `after_filter`. You can also use `if` or `unless` to specify the name of a controller method which determines whether it's necessary.
+Finally, you can enforce that every controller action runs an authorization check using the class method `ensure_authorization_performed`, which sets up an `after_action` to raise an exception if it wasn't. Any `only` or `except` arguments will be passed to `after_action`. You can also use `if` or `unless` to specify the name of a controller method which determines whether it's necessary.
 
-Since this runs in an `after_filter`, it obviously doesn't prevent the action, it just alerts you that no authorization was performed. Therefore, it's most useful in development. An example usage might be:
+Since this runs in an `after_action`, it obviously doesn't prevent the action, it just alerts you that no authorization was performed. Therefore, it's most useful in development. An example usage might be:
 
 ```ruby
 class ApplicationController < ActionController::Base
