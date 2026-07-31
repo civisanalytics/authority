@@ -8,7 +8,9 @@ describe Authority::Controller do
   class ExampleController
     def self.rescue_from(*args) ; end
 
-    def self.before_filter(*args) ; end
+    def self.before_action(*args) ; end
+
+    def self.after_action(*args) ; end
   end
 
   # Get a fresh descendant class for each test, in case we've modified it
@@ -90,12 +92,6 @@ describe Authority::Controller do
 
         let(:child_controller) { Class.new(controller_class) }
 
-        let(:rails5_controller) do
-          Class.new(controller_class) do
-            def self.before_action(*args) ; end
-          end
-        end
-
         it "allows specifying the class of the model to protect" do
           controller_class.authorize_actions_for(resource_class)
           expect(controller_class.authority_resource).to eq(resource_class)
@@ -106,16 +102,10 @@ describe Authority::Controller do
           expect(controller_class.authority_resource).to eq(:finder_method)
         end
 
-        it "sets up a before_filter, passing the options it was given" do
+        it "sets up a before_action, passing the options it was given" do
           filter_options = {:only => [:show, :edit, :update]}
-          expect(controller_class).to receive(:before_filter).with(:run_authorization_check, filter_options)
+          expect(controller_class).to receive(:before_action).with(:run_authorization_check, filter_options)
           controller_class.authorize_actions_for(resource_class, filter_options)
-        end
-
-        it "prefers to set up a before_action over before_filter, passing the options it was given" do
-          filter_options = {:only => [:show, :edit, :update]}
-          expect(rails5_controller).to receive(:before_action).with(:run_authorization_check, filter_options)
-          rails5_controller.authorize_actions_for(resource_class, filter_options)
         end
 
         it "if :all_actions option is given, it overrides the action hash to use the action given" do
@@ -217,21 +207,21 @@ describe Authority::Controller do
           allow(controller_instance).to receive(:action_name).and_return(:bar)
         end
 
-        it "sets up an after_filter, passing the options it was given" do
+        it "sets up an after_action, passing the options it was given" do
           filter_options = {:only => [:show, :edit, :update]}
-          expect(controller_class).to receive(:after_filter).with(filter_options)
+          expect(controller_class).to receive(:after_action).with(filter_options)
           controller_class.ensure_authorization_performed(filter_options)
         end
 
-        it "triggers AuthorizationNotPerformed in after filter" do
-          allow(controller_class).to receive(:after_filter).and_yield(controller_instance)
+        it "triggers AuthorizationNotPerformed in after action" do
+          allow(controller_class).to receive(:after_action).and_yield(controller_instance)
           expect {
             controller_class.ensure_authorization_performed
           }.to raise_error(Authority::Controller::AuthorizationNotPerformed)
         end
 
         it "AuthorizationNotPerformed error has meaningful message" do
-          allow(controller_class).to receive(:after_filter).and_yield(controller_instance)
+          allow(controller_class).to receive(:after_action).and_yield(controller_instance)
           expect {
             controller_class.ensure_authorization_performed
           }.to raise_error("No authorization was performed for FooController#bar")
@@ -239,7 +229,7 @@ describe Authority::Controller do
 
         it "does not trigger AuthorizationNotPerformed when :if is false" do
           allow(controller_instance).to receive(:authorize?) { false }
-          allow(controller_class).to receive(:after_filter).with({}).and_yield(controller_instance)
+          allow(controller_class).to receive(:after_action).with({}).and_yield(controller_instance)
           expect {
             controller_class.ensure_authorization_performed(:if => :authorize?)
           }.not_to raise_error()
@@ -247,7 +237,7 @@ describe Authority::Controller do
 
         it "does not trigger AuthorizationNotPerformed when :unless is true" do
           allow(controller_instance).to receive(:skip_authorization?) { true }
-          allow(controller_class).to receive(:after_filter).with({}).and_yield(controller_instance)
+          allow(controller_class).to receive(:after_action).with({}).and_yield(controller_instance)
           expect {
             controller_class.ensure_authorization_performed(:unless => :skip_authorization?)
           }.not_to raise_error()
@@ -255,7 +245,7 @@ describe Authority::Controller do
 
         it "does not raise error when #authorization_performed is true" do
           controller_instance.authorization_performed = true
-          allow(controller_class).to receive(:after_filter).with({}).and_yield(controller_instance)
+          allow(controller_class).to receive(:after_action).with({}).and_yield(controller_instance)
           expect {
             controller_class.ensure_authorization_performed
           }.not_to raise_error()
@@ -282,7 +272,7 @@ describe Authority::Controller do
 
       let(:user) { ExampleUser.new }
 
-      describe "run_authorization_check (used as a before_filter)" do
+      describe "run_authorization_check (used as a before_action)" do
 
         context "if a resource class was specified" do
 
